@@ -3,24 +3,38 @@
 
 using namespace daisysp;
 
+//float MoogLadder::my_tanh(float x)
+// {
+//     int sign = 1;
+//     if(x < 0)
+//     {
+//         sign = -1;
+//         x    = -x;
+//         return x * sign;
+//     }
+//     else if(x >= 4.0f)
+//     {
+//         return sign;
+//     }
+//     else if(x < 0.5f)
+//     {
+//         return x * sign;
+//     }
+//     return sign * tanhf(x);
+// }
+
 float MoogLadder::my_tanh(float x)
 {
     int sign = 1;
-    if(x < 0)
-    {
-        sign = -1;
-        x    = -x;
-        return x * sign;
+    if (x < 0) { 
+        sign = -1; 
+        x = -x;
     }
-    else if(x >= 4.0f)
-    {
-        return sign;
+    if (x >= 4.0) {
+      return sign;
     }
-    else if(x < 0.5f)
-    {
-        return x * sign;
-    }
-    return sign * tanhf(x);
+    if (x < 0.5) return x * sign;
+    return sign * tanh(x);
 }
 
 void MoogLadder::Init(float sample_rate)

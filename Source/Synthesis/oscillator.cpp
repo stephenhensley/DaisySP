@@ -9,21 +9,26 @@ constexpr float TWO_PI_RECIP = 1.0f / TWOPI_F;
 float Oscillator::Process()
 {
     float out, t;
+    float tphs = phase_ + phs_offset_;
+    if(tphs > TWOPI_F)
+        tphs -= TWOPI_F;
+    else if(tphs < 0.f)
+        tphs += TWOPI_F;
     switch(waveform_)
     {
-        case WAVE_SIN: out = sinf(phase_); break;
+        case WAVE_SIN: out = sinf(tphs); break;
         case WAVE_TRI:
-            t   = -1.0f + (2.0f * phase_ * TWO_PI_RECIP);
+            t   = -1.0f + (2.0f * tphs * TWO_PI_RECIP);
             out = 2.0f * (fabsf(t) - 0.5f);
             break;
         case WAVE_SAW:
-            out = -1.0f * (((phase_ * TWO_PI_RECIP * 2.0f)) - 1.0f);
+            out = -1.0f * (((tphs * TWO_PI_RECIP * 2.0f)) - 1.0f);
             break;
-        case WAVE_RAMP: out = ((phase_ * TWO_PI_RECIP * 2.0f)) - 1.0f; break;
-        case WAVE_SQUARE: out = phase_ < pw_rad_ ? (1.0f) : -1.0f; break;
+        case WAVE_RAMP: out = ((tphs * TWO_PI_RECIP * 2.0f)) - 1.0f; break;
+        case WAVE_SQUARE: out = tphs < pw_rad_ ? (1.0f) : -1.0f; break;
         case WAVE_POLYBLEP_TRI:
-            t   = phase_ * TWO_PI_RECIP;
-            out = phase_ < PI_F ? 1.0f : -1.0f;
+            t   = tphs * TWO_PI_RECIP;
+            out = tphs < PI_F ? 1.0f : -1.0f;
             out += Polyblep(phase_inc_, t);
             out -= Polyblep(phase_inc_, fmodf(t + 0.5f, 1.0f));
             // Leaky Integrator:
@@ -32,14 +37,14 @@ float Oscillator::Process()
             last_out_ = out;
             break;
         case WAVE_POLYBLEP_SAW:
-            t   = phase_ * TWO_PI_RECIP;
+            t   = tphs * TWO_PI_RECIP;
             out = (2.0f * t) - 1.0f;
             out -= Polyblep(phase_inc_, t);
             out *= -1.0f;
             break;
         case WAVE_POLYBLEP_SQUARE:
-            t   = phase_ * TWO_PI_RECIP;
-            out = phase_ < pw_rad_ ? 1.0f : -1.0f;
+            t   = tphs * TWO_PI_RECIP;
+            out = tphs < pw_rad_ ? 1.0f : -1.0f;
             out += Polyblep(phase_inc_, t);
             out -= Polyblep(phase_inc_, fmodf(t + (1.0f - pw_), 1.0f));
             out *= 0.707f; // ?

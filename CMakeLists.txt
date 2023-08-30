@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 
 project(DAISYSP VERSION 0.0.1)
 
-add_library(DaisySP STATIC 
+add_library(DaisySP STATIC
 Source/Control/adenv.cpp
 Source/Control/adsr.cpp
 Source/Control/line.cpp
@@ -63,7 +63,6 @@ Source/Utility/metro.cpp
 Source/Utility/port.cpp
 )
 
-<<<<<<< HEAD
 set( HEADER_FILES
 Source/Control/adenv.h
 Source/Control/adsr.h
@@ -145,11 +144,9 @@ include_directories(Source/Noise)
 include_directories(Source/PhysicalModeling)
 include_directories(Source/Synthesis)
 include_directories(Source/Utility)
-=======
->>>>>>> master
 
 set_target_properties(DaisySP PROPERTIES PUBLIC
-  CXX_STANDARD 14 
+  CXX_STANDARD 14
   CXX_STANDARD_REQUIRED
   )
 

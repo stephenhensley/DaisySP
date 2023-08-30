@@ -29,7 +29,7 @@ const float kInitialmode  = 0;
 const float kFreezeMode   = 0.5f;
 const int   kStereoSpread = 23;
 
-constexpr float kTargetSr    = 96000.f;
+constexpr float kTargetSr    = 44100.f;
 constexpr float kOriginalSr  = 44100.f;
 constexpr float kRetuneCoeff = (kTargetSr / kOriginalSr);
 
@@ -38,9 +38,9 @@ constexpr float kRetuneCoeff = (kTargetSr / kOriginalSr);
 // but would need scaling for 96KHz (or other) sample rates.
 // The values were obtained by listening tests.
 
-/** Freeverb Implementation 
-  * based on original C++ sources from  Jezar at Dreampoint, June 2000 
-  * 
+/** Freeverb Implementation
+  * based on original C++ sources from  Jezar at Dreampoint, June 2000
+  *
   */
 class Freeverb
 {
@@ -56,7 +56,7 @@ class Freeverb
     /** Process a single sample replacing the output */
     void Process(float *inl, float *inr, float *outl, float *outr);
 
-    /** Processes a block of audio, skip can be used if necessary. 
+    /** Processes a block of audio, skip can be used if necessary.
         The contents of *outN are replaced by the new signal  */
     void ProcessBlockReplace(float *inl,
                              float *inr,
@@ -65,7 +65,7 @@ class Freeverb
                              int    size,
                              int    skip = 1);
 
-    /** Processes a block of audio, skip can be used if necessary. 
+    /** Processes a block of audio, skip can be used if necessary.
         The contents of *outN are mixed with by the new signal  */
     void ProcessBlockMix(float *inl,
                          float *inr,

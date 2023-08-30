@@ -1,9 +1,8 @@
-
 cmake_minimum_required(VERSION 3.14)
 
 project(DAISYSP VERSION 0.0.1)
 
-set(SOURCE_FILES 
+add_library(DaisySP STATIC 
 Source/Control/adenv.cpp
 Source/Control/adsr.cpp
 Source/Control/line.cpp
@@ -26,8 +25,10 @@ Source/Effects/fold.cpp
 Source/Effects/Freeverb.cpp
 Source/Effects/overdrive.cpp
 Source/Effects/reverbsc.cpp
+Source/Effects/phaser.cpp
 Source/Effects/sampleratereducer.cpp
 Source/Effects/tremolo.cpp
+Source/Effects/wavefolder.cpp
 Source/Filters/allpass.cpp
 Source/Filters/atone.cpp
 Source/Filters/biquad.cpp
@@ -37,6 +38,7 @@ Source/Filters/moogladder.cpp
 Source/Filters/nlfilt.cpp
 Source/Filters/svf.cpp
 Source/Filters/tone.cpp
+Source/Filters/soap.cpp
 Source/Noise/clockednoise.cpp
 Source/Noise/grainlet.cpp
 Source/Noise/particle.cpp
@@ -61,6 +63,7 @@ Source/Utility/metro.cpp
 Source/Utility/port.cpp
 )
 
+<<<<<<< HEAD
 set( HEADER_FILES
 Source/Control/adenv.h
 Source/Control/adsr.h
@@ -142,12 +145,26 @@ include_directories(Source/Noise)
 include_directories(Source/PhysicalModeling)
 include_directories(Source/Synthesis)
 include_directories(Source/Utility)
+=======
+>>>>>>> master
 
-set(CMAKE_CXX_STANDARD 14)
+set_target_properties(DaisySP PROPERTIES PUBLIC
+  CXX_STANDARD 14 
+  CXX_STANDARD_REQUIRED
+  )
 
-ADD_LIBRARY( DaisySP STATIC 
-    ${SOURCE_FILES} 
-    ${HEADER_FILES} 
-    Source/daisysp.h )
-TARGET_INCLUDE_DIRECTORIES(DaisySP PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/Source>" "$<INSTALL_INTERFACE:Source>")
 
+target_include_directories(DaisySP PUBLIC
+  ${CMAKE_CURRENT_LIST_DIR}/Source
+  PRIVATE
+  "Source"
+  "Source/Control"
+  "Source/Drums"
+  "Source/Dynamics"
+  "Source/Effects"
+  "Source/Filters"
+  "Source/Noise"
+  "Source/PhysicalModeling"
+  "Source/Synthesis"
+  "Source/Utility"
+  )

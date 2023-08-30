@@ -3,7 +3,7 @@ TARGET = libdaisysp
 MODULE_DIR = Source
 
 # Each Module Directory is listed below with it's modules.
-# Header only modules are listed commented out 
+# Header only modules are listed commented out
 # below the others.
 
 CONTROL_MOD_DIR = Control
@@ -26,7 +26,7 @@ DYNAMICS_MODULES = \
 balance \
 compressor \
 crossfade \
-limiter 
+limiter
 
 EFFECTS_MOD_DIR = Effects
 EFFECTS_MODULES = \
@@ -35,6 +35,7 @@ bitcrush \
 chorus \
 decimator \
 flanger \
+Freeverb \
 fold \
 overdrive \
 phaser \
@@ -42,7 +43,9 @@ reverbsc \
 sampleratereducer \
 tremolo \
 wavefolder
-#pitchshifter 
+#FvComb
+#FvAllpass
+#pitchshifter
 
 FILTER_MOD_DIR = Filters
 FILTER_MODULES = \
@@ -55,16 +58,16 @@ moogladder \
 nlfilt \
 svf \
 tone \
-soap 
+soap
 #fir
 
 NOISE_MOD_DIR = Noise
 NOISE_MODULES = \
 clockednoise \
 grainlet \
-particle 
-#dust 
-#fractal_noise 
+particle
+#dust
+#fractal_noise
 #whitenoise
 
 PHYSICAL_MODELING_MOD_DIR = PhysicalModeling
@@ -74,8 +77,8 @@ modalvoice \
 pluck \
 KarplusString \
 resonator \
-stringvoice 
-#PolyPluck 
+stringvoice
+#PolyPluck
 
 SYNTHESIS_MOD_DIR = Synthesis
 SYNTHESIS_MODULES = \
@@ -87,20 +90,20 @@ oscillatorbank \
 variablesawosc \
 variableshapeosc \
 vosim \
-zoscillator 
-#harmonic_osc 
+zoscillator
+#harmonic_osc
 
 UTILITY_MOD_DIR = Utility
 UTILITY_MODULES = \
 dcblock \
 jitter \
 metro \
-port 
-#delayline 
-#dsp 
+port
+#delayline
+#dsp
 #looper
-#maytrig 
-#samplehold 
+#maytrig
+#samplehold
 #smooth_random
 
 ######################################
@@ -181,11 +184,11 @@ MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
 
 # macros for gcc
 # AS defines
-AS_DEFS = 
+AS_DEFS =
 
 # C defines
 C_DEFS =  \
--DSTM32H750xx 
+-DSTM32H750xx
 
 C_INCLUDES = \
 -I$(MODULE_DIR) \
@@ -197,7 +200,7 @@ C_INCLUDES = \
 -I$(MODULE_DIR)/$(NOISE_MOD_DIR) \
 -I$(MODULE_DIR)/$(PHYSICAL_MODELING_MOD_DIR) \
 -I$(MODULE_DIR)/$(SYNTHESIS_MOD_DIR) \
--I$(MODULE_DIR)/$(UTILITY_MOD_DIR) 
+-I$(MODULE_DIR)/$(UTILITY_MOD_DIR)
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
@@ -214,10 +217,10 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)"
 CPPFLAGS = $(CFLAGS)
 CPPFLAGS += \
 -fno-exceptions \
--finline-functions 
+-finline-functions
 
 # default action: build all
-all: $(BUILD_DIR)/$(TARGET).a 
+all: $(BUILD_DIR)/$(TARGET).a
 
 #######################################
 # build the library
@@ -245,7 +248,7 @@ $(BUILD_DIR)/$(TARGET).a: $(OBJECTS) Makefile
 	$(AR) rcs $@ $(OBJECTS)
 
 $(BUILD_DIR):
-	mkdir $@        
+	mkdir $@
 
 #######################################
 # clean up

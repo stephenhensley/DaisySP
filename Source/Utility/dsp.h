@@ -13,6 +13,7 @@
 #define PI_F 3.1415927410125732421875f
 #define TWOPI_F (2.0f * PI_F)
 #define HALFPI_F (PI_F * 0.5f)
+#define TWOPI_RECIP_F 0.15915494309f
 #define DSY_MIN(in, mn) (in < mn ? in : mn)
 #define DSY_MAX(in, mx) (in > mx ? in : mx)
 #define DSY_CLAMP(in, mn, mx) (DSY_MIN(DSY_MAX(in, mn), mx))
@@ -125,8 +126,8 @@ inline float mtof(float m)
     return powf(2, (m - 69.0f) / 12.0f) * 440.0f;
 }
 
-/** Denormalize small floats in place 
-  * Based on undernormalize macro by Jezar based on IS_DENORMAL macro by Jon Watte 
+/** Denormalize small floats in place
+  * Based on undernormalize macro by Jezar based on IS_DENORMAL macro by Jon Watte
   */
 inline void denormalize(float &sample)
 {
@@ -153,16 +154,16 @@ enum class Mapping
     LOG,
 };
 
-/** Maps a float between a specified range, using a specified curve. 
- * 
+/** Maps a float between a specified range, using a specified curve.
+ *
  *  \param in a value between 0 to 1 that will be mapped to the new range.
  *  \param min the new minimum value
  *  \param max the new maxmimum value
  *  \param curve a Mapping Value to adjust the response curve of the transformation
  *               defaults to Linear. @see Mapping
- * 
+ *
  *  When using the log curve min and max, must be greater than zero.
- * 
+ *
  *  \retval returns the transformed float within the new range.
 */
 inline float
@@ -241,11 +242,11 @@ inline float SoftClip(float x)
         return SoftLimit(x);
 }
 
-/** Quick check for Invalid float values (NaN, Inf, out of range) 
- ** \param x value passed by reference, replaced by y if invalid. 
- ** \param y value to replace x if invalidity is found. 
- ** 
- ** When DEBUG is true in the build, this will halt 
+/** Quick check for Invalid float values (NaN, Inf, out of range)
+ ** \param x value passed by reference, replaced by y if invalid.
+ ** \param y value to replace x if invalidity is found.
+ **
+ ** When DEBUG is true in the build, this will halt
  ** execution for tracing the reason for the invalidity. */
 inline void TestFloat(float &x, float y = 0.f)
 {

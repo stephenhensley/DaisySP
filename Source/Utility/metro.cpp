@@ -28,3 +28,9 @@ void Metro::SetFreq(float freq)
     freq_    = freq;
     phs_inc_ = (TWOPI_F * freq_) / sample_rate_;
 }
+
+
+float Metro::GetNormalizedPhase() const
+{
+    return phs_ * TWOPI_RECIP_F;
+}

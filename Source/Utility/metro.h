@@ -16,9 +16,9 @@ class Metro
     /** Initializes Metro module.
         Arguments:
         - freq: frequency at which new clock signals will be generated
-            Input Range: 
+            Input Range:
         - sample_rate: sample rate of audio engine
-            Input range: 
+            Input range:
     */
     void Init(float freq, float sample_rate);
 
@@ -28,7 +28,10 @@ class Metro
 
     /** resets phase to 0
     */
-    inline void Reset() { phs_ = 0.0f; }
+    inline void Reset(float newphs = 0.f) { phs_ = newphs; }
+
+    float GetNormalizedPhase() const;
+
     /** Sets frequency at which Metro module will run at.
     */
     void SetFreq(float freq);

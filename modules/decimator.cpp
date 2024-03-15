@@ -16,7 +16,9 @@ float Decimator::Process(float input)
 {
     int32_t temp;
     //downsample
-    threshold_ = (uint32_t)((downsample_factor_ * downsample_factor_) * 96.0f);
+    //threshold_ = (uint32_t)((downsample_factor_ * downsample_factor_) * 96.0f);
+    //threshold_ = (uint32_t)((downsample_factor_ * downsample_factor_) * 192.0f);
+    threshold_ = (uint32_t)((downsample_factor_ * downsample_factor_) * 384.0f);
     inc_ += 1;
     if(inc_ > threshold_)
     {

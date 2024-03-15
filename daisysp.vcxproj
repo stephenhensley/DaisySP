@@ -106,6 +106,7 @@
     <ClCompile Include="modules\reverbsc.cpp" />
     <ClCompile Include="modules\svf.cpp" />
     <ClCompile Include="modules\tone.cpp" />
+    <ClCompile Include="$(BSP_ROOT)\STM32H7xxxx\StartupFiles\startup_stm32h750xx.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="modules\adenv.h" />

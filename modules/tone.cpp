@@ -12,7 +12,7 @@ void Tone::Init(float sample_rate)
     sample_rate_ = sample_rate;
 }
 
-float Tone::Process(float &in)
+float Tone::Process(float in)
 {
     float out;
 

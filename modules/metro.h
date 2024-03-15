@@ -26,9 +26,10 @@ class Metro
     */
     uint8_t Process();
 
-    /** resets phase to 0
+    /** resets phase to TWOPI, which will cause a pulse on the next Process before resetting the phase to 0
     */
-    inline void Reset() { phs_ = 0.0f; }
+    void Reset();
+
     /** Sets frequency at which Metro module will run at.
     */
     void SetFreq(float freq);
@@ -36,6 +37,10 @@ class Metro
     /** Returns current value for frequency.
     */
     inline float GetFreq() { return freq_; }
+
+    /** Useful for determining pulse widths, and when to reset.
+     ** Returns Normalied Phase value in the range of 0-1 */
+    float GetNormalizedPhase();
 
   private:
     float freq_;

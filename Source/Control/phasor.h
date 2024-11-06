@@ -1,11 +1,3 @@
-/*
-Copyright (c) 2020 Electrosmith, Corp
-
-Use of this source code is governed by an MIT-style
-license that can be found in the LICENSE file or at
-https://opensource.org/licenses/MIT.
-*/
-
 #pragma once
 #ifndef DSY_PHASOR_H
 #define DSY_PHASOR_H
@@ -56,6 +48,9 @@ class Phasor
     /** Sets frequency of the Phasor in Hz
     */
     void SetFreq(float freq);
+
+    /** Resets phs to 0 */
+    inline void Reset() { phs_ = 0.f; }
 
 
     /** Returns current frequency value in Hz

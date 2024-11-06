@@ -31,6 +31,18 @@ void Svf::Init(float sample_rate)
 void Svf::Process(float in)
 {
     input_ = in;
+
+    if(low_ != low_)
+        low_ = 0.0f;
+    if(high_ != high_)
+        high_ = 0.0f;
+    if(band_ != band_)
+        band_ = 0.0f;
+    if(peak_ != peak_)
+        peak_ = 0.0f;
+    if(notch_ != notch_)
+        notch_ = 0.0f;
+
     // first pass
     notch_ = input_ - damp_ * band_;
     low_   = low_ + freq_ * band_;

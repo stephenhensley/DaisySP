@@ -3,6 +3,7 @@
 #define DSY_PHASOR_H
 #ifdef __cplusplus
 
+
 namespace daisysp
 {
 /** Generates a normalized signal moving from 0-1 at the specified frequency.
@@ -16,6 +17,7 @@ class Phasor
   public:
     Phasor() {}
     ~Phasor() {}
+
     /** Initializes the Phasor module
     sample rate, and freq are in Hz
     initial phase is in radians
@@ -23,12 +25,7 @@ class Phasor
     - phs = 0.0f
     - freq = 1.0f
     */
-    inline void Init(float sample_rate, float freq, float initial_phase)
-    {
-        sample_rate_ = sample_rate;
-        phs_         = initial_phase;
-        SetFreq(freq);
-    }
+    void Init(float sample_rate, float freq, float initial_phase);
 
     /** Initialize phasor with samplerate and freq
     */
@@ -60,6 +57,7 @@ class Phasor
   private:
     float freq_;
     float sample_rate_, inc_, phs_;
+    float two_pi_recip_sr_;
 };
 } // namespace daisysp
 #endif
